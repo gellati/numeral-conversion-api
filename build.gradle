@@ -1,0 +1,97 @@
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
+    }
+}
+
+
+
+plugins {
+    id 'java'
+    id 'com.bmuschko.docker-remote-api' version '3.2.0'
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+apply plugin: 'application'
+apply plugin: 'com.bmuschko.docker-java-application'
+
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
+
+
+
+jar {
+    baseName = 'numeral-conversion-service'
+    version =  '0.1.0-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-devtools')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("io.springfox:springfox-swagger2:2.8.0")
+    compile("io.springfox:springfox-swagger-ui:2.8.0")
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+    compile('com.google.guava:guava:23.0')
+    // tag::tests[]
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework.restdocs:spring-restdocs-mockmvc")
+    // end::tests[]
+
+}
+
+bootRun {
+    systemProperties = System.getProperties()
+}
+
+test {
+    systemProperties = System.getProperties()
+}
+
+
+docker {
+    javaApplication {
+        baseImage = 'openjdk:latest'
+        tag = 'numeral'
+        ports = [8080]
+    }
+}
+
+task createDockerfile(type: Dockerfile) {
+    destFile=project.file('build/docker/Dockerfile')
+    from 'ubuntu:16.04'
+}
+
+
+task createContainer(type: DockerCreateContainer){
+    dependsOn dockerBuildImage
+    targetImageId { dockerBuildImage.getImageId()}
+    portBindings = ['8080:8080']
+    containerName = 'numeral-conversion-service'
+}
+
+task startContainer(type:DockerStartContainer){
+    dependsOn createContainer
+    targetContainerId { createContainer.getContainerId() }
+}
