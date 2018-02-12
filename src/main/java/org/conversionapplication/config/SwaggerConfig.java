@@ -20,9 +20,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
-// This configuration class taken from here:
-// https://springframework.guru/spring-boot-restful-api-documentation-with-swagger-2/
+/**
+ * This configuration class taken from here:
+ * https://springframework.guru/spring-boot-restful-api-documentation-with-swagger-2/
+ *
+ */
 
 @Configuration
 @EnableSwagger2

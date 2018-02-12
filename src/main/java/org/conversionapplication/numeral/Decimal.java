@@ -4,11 +4,25 @@ import org.conversionapplication.interfaces.NumeralInterface;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Class to convert string representing decimal numbers into other numeral systems
+ *
+ */
+
+
 public class Decimal implements NumeralInterface {
 
     final String DECIMAL = "DECIMAL";
 
-    // source: https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
+
+    /**
+     * Method to convert decimal integer strings into roman numbers.
+     * Implementation source: https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
+     *
+     * @param number       the decimal number to be converted
+     * @return             the roman conversion
+     */
+
     private final String convertToRomanString(int number) {
 
     LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
@@ -78,6 +92,15 @@ public class Decimal implements NumeralInterface {
         return convertToRomanString(Integer.parseInt(number));
     }
 
+
+    /**
+     * Takes a number and converts it to the given target number system
+     *
+     * @param target      target numeral system into which convert
+     * @param number      the number to be converted
+     * @return            the result of the conversion
+     */
+
     public String convert(String target, String number){
         target = target.toLowerCase();
         String result;
@@ -88,7 +111,11 @@ public class Decimal implements NumeralInterface {
         return result;
     }
 
-//    @Override
+    /**
+     * Identifer for the conversion class
+     * @return   identifier for the decimal converter
+     */
+
     public String getId(){
         return DECIMAL;
     }

@@ -5,6 +5,12 @@ import org.conversionapplication.interfaces.NumeralInterface;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class to convert string representing roman numbers into other numeral systems
+ *
+ */
+
+
 public class Roman implements NumeralInterface {
     Map<Character, Integer> container;
     public final String ROMAN = "ROMAN";
@@ -20,8 +26,13 @@ public class Roman implements NumeralInterface {
         container.put('M', 1000);
     }
 
+    /**
+     * Method to convert roman numbers to decimal numbers.
+     * Implementation adapted from here: https://stackoverflow.com/questions/9073150/converting-roman-numerals-to-decimal
+     * @param roman the roman number to be converted
+     * @return      the converted number
+     */
 
-    // adapted from here: https://stackoverflow.com/questions/9073150/converting-roman-numerals-to-decimal
     private int convertToDecimalInt(String number) {
 
         if (number.isEmpty() || number == null ) return 0;
@@ -77,6 +88,14 @@ public class Roman implements NumeralInterface {
         return Integer.toString(convertToDecimalInt(roman));
     }
 
+    /**
+     * Takes a number and converts it to the given target number system
+     *
+     * @param target      target numeral system into which convert
+     * @param number      the number to be converted
+     * @return            the result of the conversion
+     */
+
     public String convert(String target, String number){
         target = target.toLowerCase();
         String result;
@@ -87,6 +106,11 @@ public class Roman implements NumeralInterface {
         }
         return result;
     }
+
+    /**
+     * Identifer for the conversion class
+     * @return   identifier for the roman converter
+     */
 
     public String getId(){
         return ROMAN;

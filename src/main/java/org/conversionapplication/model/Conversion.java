@@ -3,6 +3,11 @@ package org.conversionapplication.model;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Class to hold data about the number conversion
+ *
+ */
+
 public class Conversion {
 
     @ApiModelProperty(dataType = "java.lang.String", example = "decimal", required = true,  value = "The source number's numeral system")
@@ -15,6 +20,14 @@ public class Conversion {
     private String targetNumber;
 
     public Conversion(){}
+
+    /**
+     * Initialization with data needed for the conversion.
+     *
+     * @param sourceNumeralSystem The source number's numeral system
+     * @param sourceNumber        The number to be converted
+     * @param targetNumeralSystem The target system into which the number should be converted
+     */
 
     public Conversion(String sourceNumeralSystem, String sourceNumber, String targetNumeralSystem){
         this.sourceNumber = sourceNumber;

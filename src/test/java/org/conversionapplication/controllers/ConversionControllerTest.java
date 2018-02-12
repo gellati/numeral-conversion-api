@@ -4,7 +4,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//import org.junit.Before;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-//@AutoConfigureRestDocs(outputDir = "target/snippets")
 public class ConversionControllerTest {
 
     @Autowired
     private MockMvc mvc;
-//    private WebApplicationContext context;
-    /*
 
+    /*
     @Before
     public void setUp(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
@@ -37,9 +35,8 @@ public class ConversionControllerTest {
                 .build();
     }
 */
-
     @Test
-    public void getConversion() throws Exception{
+    public void testConversion() throws Exception{
         mvc.perform(MockMvcRequestBuilders.get("/api/conversion")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
@@ -48,16 +45,5 @@ public class ConversionControllerTest {
 /*
 */
     }
-
-    /*
-    @Test
-    public void getHello() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
-    }
-    */
-
-
 
 }

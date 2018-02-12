@@ -15,6 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ConversionControllerIT {
@@ -33,7 +34,7 @@ public class ConversionControllerIT {
     }
 
     @Test
-    public void getHello() throws Exception {
+    public void getBasicDescription() throws Exception {
         ResponseEntity<String> response = template.getForEntity(base.toString(),
                 String.class);
         assertThat(response.getBody(), equalTo("The org system converter"));

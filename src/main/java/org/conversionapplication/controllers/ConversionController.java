@@ -16,6 +16,11 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
 
+/**
+ * Controller holding the REST API endpoints for the conversion
+ */
+
+
 @RestController
 @Api(value="numberconversion", description="Number conversion operations")
 public class ConversionController {
@@ -33,12 +38,20 @@ public class ConversionController {
     })
     @RequestMapping(method=RequestMethod.GET, value="/api/conversion", produces="application/json")
     public ResponseEntity conversion(
-            @RequestParam(value = "Source numeral system from which to convert", required = true) String source,
-            @RequestParam(value = "Target numeral system into which the conversion is made", required = true) String target,
-            @RequestParam(value = "Number that should be converted", required = true) String number,
+            @RequestParam(value = "source", required = false) String source,
+            @RequestParam(value = "target", required = false) String target,
+            @RequestParam(value = "number", required = false) String number,
+/*
+// value parameter conflicts with open api
+            @RequestParam(value = "Source numeral system from which to convert", required = false) String source,
+            @RequestParam(value = "Target numeral system into which the conversion is made", required = false) String target,
+            @RequestParam(value = "Number string that should be converted", required = false) String number,
+*/
+
             Model model){
+        System.out.println(number + ":" + source + ":" + target);
         if(number == null && source == null && target == null){
-            return new ResponseEntity(new CustomErrorType("no conversion"), HttpStatus.I_AM_A_TEAPOT);
+            return new ResponseEntity(new CustomErrorType("no conversion"), HttpStatus.BAD_REQUEST);
         }
         Conversion conversion = new Conversion(source, number, target);
         NumeralCollection numeralCollection = new NumeralCollection();

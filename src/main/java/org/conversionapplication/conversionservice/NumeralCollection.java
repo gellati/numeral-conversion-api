@@ -9,9 +9,13 @@ import java.util.NoSuchElementException;
 
 public class NumeralCollection {
 
-//    https://github.com/google/guava/wiki/ImmutableCollectionsExplained
-    // adopting defensive programming by creating an ImmutableList of all numerals to
-    // have a constant collection
+
+    /**
+     * Adopting defensive programming by creating an ImmutableList of all numerals to
+     * have a constant collection
+     * https://github.com/google/guava/wiki/ImmutableCollectionsExplained
+     */
+
     public static final ImmutableList<NumeralInterface> ALL_NUMERALS = ImmutableList.of(
             new Roman(),
             new Decimal()
@@ -20,7 +24,12 @@ public class NumeralCollection {
     public NumeralCollection() {
     }
 
-    //  iterate over all elements in the ALL_NUMERALS list to find the matching one
+    /**
+     * Iterate over all elements in the ALL_NUMERALS list to find the matching one
+     * @param id   string representing the desired numeral system
+     * @return     the numeral class corresponding to the id
+     */
+
     public NumeralInterface getNumeral(String id){
         return ALL_NUMERALS.stream()
                 .filter(c -> c.getId().equalsIgnoreCase(id))
