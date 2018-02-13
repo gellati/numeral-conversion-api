@@ -146,7 +146,11 @@ numeral                                   latest              1ed12e3fbc0f      
 
 ```
 
-The docker container is accessible at `http://localhost:8080`
+The image can be run with
+
+    docker run numeral
+
+Once the container is up and running, the service is accessible at `http://localhost:8080`.
 
 
 # Tech and license stack
