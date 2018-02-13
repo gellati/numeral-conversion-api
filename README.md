@@ -159,7 +159,7 @@ Built with [Spring Boot](https://github.com/spring-projects/spring-boot) and [Gr
 
 The following table lists used technologies and libraries together with their associated license.
 
-|Library      |                                                       Licence |
+|Library      |                                                       License |
 |--------------------------------------------------------------------|----------|
 |[Spring Boot](https://github.com/spring-projects/spring-boot)        |Apache License 2.0 |
 |[Gradle](https://gradle.org/)                                        |Apache License 2.0 |
