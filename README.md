@@ -12,7 +12,7 @@ Clone the repository to your own computer. Make sure you have Java 8 installed.
 
 ### Building
 
-To build the project, do
+Gradle is used as the project's build tool. To build the project, do
 
     ./gradlew clean build
 
@@ -29,6 +29,8 @@ A simpler way to start the server is to do
     ./gradlew bootrun
     
 in the project root directory. 
+
+This will start a local server at `http://localhost:8080`
     
 Gradle tasks can be excluded by placing an `-x` in front, e.g.
 
@@ -40,8 +42,7 @@ All runnable Gradle tasks can be listed with `gradle tasks`.
 
 ### Usage
 
-Once the service is running, the conversion endpoint is at `api/conversion`. Here numeral conversion can be done with GET requests.
-
+Once the service is up and running, the conversion endpoint is at `api/conversion`. Here numeral conversion can be done with GET requests.
 
 The request is done with the following parameters
 
@@ -56,7 +57,24 @@ A GET request can be done with `curl`
 
     curl -X GET 'http://localhost:8080/api/conversion?source=decimal&target=roman&number=6' 
 
-If the request succeeds, the server will return an answer and 200 OK in the header. 
+If the request succeeds, the server will return an answer in JSON format and 200 OK in the header. 
+
+Example output:
+
+    {
+    "sourceNumeralSystem": "decimal",
+    "sourceNumber": "6",
+    "targetNumeralSystem": "roman",
+    "targetNumber": "VI"
+    }
+
+A POST request can be made to the same url, giving a response with the same information.
+The POST request should have `Content-Type: application/json` and the request parameters in the body.
+
+Example of a POST request body:
+
+    {"source":"decimal","number":"6","target":"roman"}
+
 
 The return message contains the following information
 
@@ -68,11 +86,10 @@ The return message contains the following information
 |targetNumber        | String       | the result number of the conversion |
 
 
-Currently supported source and target numeral systems are: decimal, roman
+
+Currently supported source and target numeral systems are decimal and roman.
 
 
-// todo
-// post requests
 
 ## Documentation
 
@@ -87,11 +104,11 @@ This creates the documentation files in the `docs` folder which can be read with
 
 ### API documentation
 
-The API is documented with Open API (aka Swagger) and can be read at http://localhost:8080/swagger-ui.html
+The API is documented with Open API (aka Swagger) and can be read at `http://localhost:8080/swagger-ui.html`
 
-Documentation on how to build Open API in Swagger [here](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+Documentation on how to build Open API in Swagger [here](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api).
 
-[Open API specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md) as [implemented in Java](http://docs.swagger.io/swagger-core/v1.3.12/apidocs/index.html?com/wordnik/swagger/annotations/ApiModelProperty.html) 
+Using instructions on how to implement the [Open API specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md)  from [here](http://docs.swagger.io/swagger-core/v1.3.12/apidocs/index.html?com/wordnik/swagger/annotations/ApiModelProperty.html).
 
 
 
@@ -129,18 +146,22 @@ numeral                                   latest              1ed12e3fbc0f      
 
 ```
 
+The docker container is accessible at `http://localhost:8080`
+
 
 # Tech and licence stack
 
-Built with [Spring Boot](https://github.com/spring-projects/spring-boot), API documentation with [Open API]() and dockerisation with the gradle docker plugin.
+Built with [Spring Boot](https://github.com/spring-projects/spring-boot) and [Gradle](https://gradle.org/), API documentation with [Open API]() and dockerisation with the [gradle docker plugin](https://github.com/bmuschko/gradle-docker-plugin).
 
 The following table lists used technologies and libraries together with their associated license.
 
 |Library      |                                                       Licence |
 |--------------------------------------------------------------------|----------|
 |[Spring Boot](https://github.com/spring-projects/spring-boot)        |Apache License 2.0 |
+|[Gradle](https://gradle.org/)                                        |Apache License 2.0 |
 |[Open API](https://www.openapis.org/)                                 | Apache License 2.0 |
 |[Docker CE](https://www.docker.com/community-edition)                 |Apache License 2.0|
 |[gradle docker plugin](https://github.com/bmuschko/gradle-docker-plugin) | Apache License 2.0 |
 |[Guava](https://github.com/google/guava)                           | Apache License 2.0 |
 |[Springfox](https://github.com/springfox/springfox)                  | Apache License 2.0 |
+|[Apache Commons Lang](http://commons.apache.org/proper/commons-lang/)| Apache License 2.0 |

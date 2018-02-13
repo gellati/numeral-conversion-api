@@ -1,8 +1,12 @@
 package org.conversionapplication.numeral;
 
 import org.conversionapplication.interfaces.NumeralInterface;
+import org.springframework.util.StringUtils;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+//import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class to convert string representing decimal numbers into other numeral systems
@@ -94,7 +98,7 @@ public class Decimal implements NumeralInterface {
 
 
     /**
-     * Takes a number and converts it to the given target number system
+     * Takes a number and converts it to the given target number system. Must be a positive integer.
      *
      * @param target      target numeral system into which convert
      * @param number      the number to be converted
@@ -102,6 +106,13 @@ public class Decimal implements NumeralInterface {
      */
 
     public String convert(String target, String number){
+        if(!org.apache.commons.lang3.StringUtils.isNumeric(number)){
+            throw new IllegalArgumentException("Not a positive integer:" + number);
+        }
+        if(Integer.parseInt(number) > 1000){
+            throw new IllegalArgumentException("Number out of range:" + number);
+        }
+
         target = target.toLowerCase();
         String result;
         switch(target){
