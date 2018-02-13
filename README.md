@@ -42,7 +42,7 @@ All runnable Gradle tasks can be listed with `gradle tasks`.
 
 ### Usage
 
-Once the service is up and running, the conversion endpoint is at `api/conversion`. Here numeral conversion can be done with GET requests.
+Once the service is up and running, the conversion endpoint is at `/api/conversion`. Here numeral conversion can be done with GET and POST requests.
 
 The request is done with the following parameters
 
@@ -95,7 +95,7 @@ Currently supported source and target numeral systems are decimal and roman.
 
 ### Java code documentation
 
-The Java code is documented with JavaDoc. The documentation can be generated with the following command:
+The Java code is documented with [JavaDoc](http://www.oracle.com/technetwork/java/javase/documentation/javadoc-137458.html). The documentation can be generated with the following command:
 
     javadoc -d ./docs -sourcepath ./src/main/java/ -subpackages org
 
@@ -149,7 +149,7 @@ numeral                                   latest              1ed12e3fbc0f      
 The docker container is accessible at `http://localhost:8080`
 
 
-# Tech and licence stack
+# Tech and license stack
 
 Built with [Spring Boot](https://github.com/spring-projects/spring-boot) and [Gradle](https://gradle.org/), API documentation with [Open API]() and dockerisation with the [gradle docker plugin](https://github.com/bmuschko/gradle-docker-plugin).
 
