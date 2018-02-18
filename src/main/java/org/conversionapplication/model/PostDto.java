@@ -1,10 +1,12 @@
 package org.conversionapplication.model;
 
+import java.io.Serializable;
+
 /**
  * POJO class to contain the post request information
  */
 
-public class PostDto {
+public class PostDto implements Serializable{
     private String source;
     private String target;
     private String number;
