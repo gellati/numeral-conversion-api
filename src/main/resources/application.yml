@@ -2,6 +2,10 @@ spring:
   application:
     name: org-conversion-application
 
+springdoc:
+  swagger-ui:
+    use-root-path: true
+
 server:
   port: 8080
   use-forward-headers: true

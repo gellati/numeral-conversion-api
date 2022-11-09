@@ -1,4 +1,4 @@
-package org.util;
+package org.conversionapplication.util;
 
 public class CustomErrorType {
 

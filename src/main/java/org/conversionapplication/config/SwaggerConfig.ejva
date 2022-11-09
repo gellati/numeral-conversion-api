@@ -1,0 +1,80 @@
+package org.conversionapplication.config;
+
+import java.util.Collections;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+// import springfox.documentation.builders.PathSelectors;
+// import springfox.documentation.builders.RequestHandlerSelectors;
+// import springfox.documentation.service.ApiInfo;
+// import springfox.documentation.service.Contact;
+// import springfox.documentation.service.Tag;
+// import springfox.documentation.spi.DocumentationType;
+// import springfox.documentation.spring.web.plugins.Docket;
+// import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import io.swagger.v3.oas.models.info.Contact;
+/**
+ * This configuration class taken from here:
+ * https://springframework.guru/spring-boot-restful-api-documentation-with-swagger-2/
+ *
+ *               // .globalResponseMessage(RequestMethod.GET, newArrayList(
+ *               //         new ResponseMessageBuilder().code(403).message("Forbidden!!!!!").build()));
+ *
+ */
+
+@Configuration
+// @EnableSwagger2
+public class SwaggerConfig extends WebMvcConfigurationSupport {
+
+    public static final String CONVERSION_TAG = "conversion service";
+
+//     @Bean
+//     public Docket api() {
+//         return new Docket(DocumentationType.SWAGGER_2)
+//                 .select()
+//                 .apis(RequestHandlerSelectors.basePackage("org.conversionapplication"))
+//                 .paths(PathSelectors.ant("/api/*"))
+//                 .build()
+//                 .tags(new Tag(CONVERSION_TAG, "Number conversion operations"))
+//                 .apiInfo(apiInfo())
+//                 .useDefaultResponseMessages(false);
+//     }
+
+//     @Bean
+//     public OpenAPI springShOpenAPI() {
+//         return new OpenAPI()
+//                 .info(new Info().title("Numeral conversion REST API")
+//                 .description("An API for converting numbers between different numeral systems.")
+//                 .version("0.0.1")
+//                 .license(new License().name("Apache 2.0"))
+//                 // .contact(new Info().contact(new Contact()
+//                 //         .name("Omar El-Begawy")
+//                 //         .email("www.example.com")
+//                 //         .url("myeaddress@company.com")
+//                 // )
+//                 );
+
+//                 // "API TOS",
+//                 // "Terms of service",
+//                 // new Contact(),
+//                 // "Apache License Version 2.0",
+//                 // "https://www.apache.org/licences/LICENSE-2.0", Collections.emptyList()
+
+
+//         }
+
+//     @Override
+//     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+//         registry.addResourceHandler("swagger-ui.html")
+//                 .addResourceLocations("classpath:/META-INF/resources/");
+
+//         registry.addResourceHandler("/webjars/**")
+//                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+//     }
+}

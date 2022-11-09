@@ -1,7 +1,7 @@
 package org.conversionapplication.model;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.NoSuchElementException;
 
 /**
  * Class to hold data about the number conversion
@@ -10,13 +10,33 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Conversion {
 
-    @ApiModelProperty(dataType = "java.lang.String", example = "decimal", required = true,  value = "The source number's numeral system")
+    @Schema(
+        type = "java.lang.String",
+        example = "decimal",
+        required = true,
+        description = "The source number's numeral system"
+    )
     private String sourceNumeralSystem;
-    @ApiModelProperty(dataType = "java.lang.String", example = "6",       required = true,  value = "The number to be converted")
+    @Schema(
+        type = "java.lang.String",
+        example = "6",
+        required = true,
+        description = "The number to be converted"
+    )
     private String sourceNumber;
-    @ApiModelProperty(dataType = "java.lang.String", example = "roman",   required = true,  value = "The target system into which the number should be converted")
+    @Schema(
+        type = "java.lang.String",
+        example = "roman",
+        required = true,
+        description = "The target system into which the number should be converted"
+    )
     private String targetNumeralSystem;
-    @ApiModelProperty(dataType = "java.lang.String", example = "VI",      required = false, value = "The converted number")
+    @Schema(
+        type = "java.lang.String",
+        example = "VI",
+        required = false,
+        description = "The converted number"
+    )
     private String targetNumber;
 
     public Conversion(){}
@@ -76,5 +96,9 @@ public class Conversion {
                 ", targetNumber='" + targetNumber + '\'' +
                 '}';
     }
+
+    // private static NoSuchElementException notFoundException(String id) {
+    //     return NoSuchElementException("not found field" + id);
+    // }
 
 }

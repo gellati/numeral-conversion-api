@@ -1,9 +1,9 @@
 package org.conversionapplication.numeral;
 
-import org.junit.Test;
-import org.conversionapplication.numeral.Decimal;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DecimalTest {
 
@@ -21,27 +21,37 @@ public class DecimalTest {
         final String f = decimal.convert(roman, "6");
         final String g = decimal.convert(roman, "99");
 
-        assertEquals(a, "DCCCXC");
-        assertEquals(b, "I");
-        assertEquals(c, "LXXXIV");
-        assertEquals(d, "CMXCVIII");
-        assertEquals(e, "IV");
-        assertEquals(f, "VI");
-        assertEquals(g, "XCIX");
+        assertEquals("DCCCXC", a);
+        assertEquals("I", b);
+        assertEquals("LXXXIV", c);
+        assertEquals("CMXCVIII", d);
+        assertEquals("IV", e);
+        assertEquals("VI", f);
+        assertEquals("XCIX", g);
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testOutOfRangeException(){
-        final Decimal decimal = new Decimal();
-        final String roman = "roman";
-        final String a = decimal.convert(roman, "4321");
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                final Decimal decimal = new Decimal();
+                final String roman = "roman";
+                decimal.convert(roman, "4321");
+            }
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testNonNumericalException(){
-        final Decimal decimal = new Decimal();
-        final String roman = "roman";
-        final String b = decimal.convert(roman, "3s1");
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                final Decimal decimal = new Decimal();
+                final String roman = "roman";
+                decimal.convert(roman, "3s1");
+            }
+        });
     }
 }

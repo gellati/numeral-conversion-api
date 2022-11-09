@@ -1,9 +1,9 @@
 package org.conversionapplication.numeral;
 
-import org.junit.Test;
-import org.conversionapplication.numeral.Roman;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 //  https://dzone.com/articles/thursday-code-puzzler-roman
@@ -17,7 +17,7 @@ public class RomanTest {
         final String decimal = "decimal";
 
         final String a = romanNumeral.convert(decimal, "DCCCXC");
-//        final String b = romanNumeral.convert(decimal, "MDCCC");
+        final String b = romanNumeral.convert(decimal, "MDCCC");
         final String c = romanNumeral.convert(decimal, "LXXXIV");
 //        final String d = romanNumeral.convert(decimal, "DCDLXLVIII");
         final String d = romanNumeral.convert(decimal, "CMXCVIII");
@@ -25,38 +25,50 @@ public class RomanTest {
         final String f = romanNumeral.convert(decimal, "VI");
         final String g = romanNumeral.convert(decimal, "XCIX");
 
-        assertEquals(a, "890");
-//        assertEquals(b, "1800");
-        assertEquals(c, "84");
-        assertEquals(d, "998");
-        assertEquals(e, "4");
-        assertEquals(f, "6");
-        assertEquals(g, "99");
+        assertEquals("890", a);
+        assertEquals("1800", b);
+        assertEquals("84", c);
+        assertEquals("998", d);
+        assertEquals("4", e);
+        assertEquals("6", f);
+        assertEquals("99", g);
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testIllegalRomanCharacter(){
-        final Roman romanNumeral = new Roman();
-        final String decimal = "decimal";
-        final String a = romanNumeral.convert(decimal, "ACCCXC");
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                final Roman romanNumeral = new Roman();
+                final String decimal = "decimal";
+                romanNumeral.convert(decimal, "ACCCXC");
+            }
+        });
     }
-    /*
-*/
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test
     public void testNonRomanNumber(){
-        final Roman romanNumeral = new Roman();
-        final String decimal = "decimal";
-        final String a = romanNumeral.convert(decimal, "IIII");
-        System.out.println(a);
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute () throws Throwable {
+                final Roman romanNumeral = new Roman();
+                final String decimal = "decimal";
+                romanNumeral.convert(decimal, "IIII");
+            }
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testIllegalSubtract(){
-        final Roman romanNumeral = new Roman();
-        final String decimal = "decimal";
-        final String a = romanNumeral.convert(decimal, "IL");
-        System.out.println(a);
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                final Roman romanNumeral = new Roman();
+                final String decimal = "decimal";
+                final String a = romanNumeral.convert(decimal, "IL");
+                System.out.println(a);
+            }
+        });
     }
-
 }

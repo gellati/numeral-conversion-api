@@ -13,10 +13,10 @@ import java.util.Map;
 
 public class Roman implements NumeralInterface {
     Map<Character, Integer> container;
-    public final String ROMAN = "ROMAN";
+    public static final String ROMAN = "ROMAN";
 
     public Roman() {
-        container = new HashMap<Character, Integer>();
+        container = new HashMap<>();
         container.put('I', 1);
         container.put('V', 5);
         container.put('X', 10);
@@ -63,16 +63,15 @@ public class Roman implements NumeralInterface {
 
     public String convert(String target, String number){
         target = target.toLowerCase();
-        String result;
-        System.out.println(target + ":" + number);
         if (number == null || number.isEmpty() || !number.matches("^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")){
             throw new IllegalArgumentException("Non-Roman:" + number);
         }
-        switch(target){
-            case "decimal": result = convertToDecimalString(number); break;
-            default: result = null;
+
+        if (target.equals("decimal")) {
+            return convertToDecimalString(number);
+        } else {
+            return null;
         }
-        return result;
     }
 
     /**

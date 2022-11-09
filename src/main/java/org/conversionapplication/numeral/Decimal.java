@@ -1,12 +1,9 @@
 package org.conversionapplication.numeral;
 
 import org.conversionapplication.interfaces.NumeralInterface;
-import org.springframework.util.StringUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-//import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class to convert string representing decimal numbers into other numeral systems
@@ -16,7 +13,7 @@ import java.util.Map;
 
 public class Decimal implements NumeralInterface {
 
-    final String DECIMAL = "DECIMAL";
+    static final String DECIMAL = "DECIMAL";
 
 
     /**
@@ -29,27 +26,27 @@ public class Decimal implements NumeralInterface {
 
     private final String convertToRomanString(int number) {
 
-    LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
-    roman_numerals.put("M", 1000);
-    roman_numerals.put("CM", 900);
-    roman_numerals.put("D", 500);
-    roman_numerals.put("CD", 400);
-    roman_numerals.put("C", 100);
-    roman_numerals.put("XC", 90);
-    roman_numerals.put("L", 50);
-    roman_numerals.put("XL", 40);
-    roman_numerals.put("X", 10);
-    roman_numerals.put("IX", 9);
-    roman_numerals.put("V", 5);
-    roman_numerals.put("IV", 4);
-    roman_numerals.put("I", 1);
-    String res = "";
-    for(Map.Entry<String, Integer> entry : roman_numerals.entrySet()){
+    LinkedHashMap<String, Integer> romanNumerals = new LinkedHashMap<>();
+    romanNumerals.put("M", 1000);
+    romanNumerals.put("CM", 900);
+    romanNumerals.put("D", 500);
+    romanNumerals.put("CD", 400);
+    romanNumerals.put("C", 100);
+    romanNumerals.put("XC", 90);
+    romanNumerals.put("L", 50);
+    romanNumerals.put("XL", 40);
+    romanNumerals.put("X", 10);
+    romanNumerals.put("IX", 9);
+    romanNumerals.put("V", 5);
+    romanNumerals.put("IV", 4);
+    romanNumerals.put("I", 1);
+    StringBuilder res = new StringBuilder();
+    for(Map.Entry<String, Integer> entry : romanNumerals.entrySet()){
         int matches = number/entry.getValue();
-        res += repeat(entry.getKey(), matches);
+        res.append(repeat(entry.getKey(), matches));
         number = number % entry.getValue();
     }
-    return res;
+    return res.toString();
     }
     public static String repeat(String s, int n) {
         if(s == null) {
@@ -62,40 +59,9 @@ public class Decimal implements NumeralInterface {
         return sb.toString();
     }
 
-
-/*
-    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
-
-    static {
-
-        map.put(1000, "M");
-        map.put(900, "CM");
-        map.put(500, "D");
-        map.put(400, "CD");
-        map.put(100, "C");
-        map.put(90, "XC");
-        map.put(50, "L");
-        map.put(40, "XL");
-        map.put(10, "X");
-        map.put(9, "IX");
-        map.put(5, "V");
-        map.put(4, "IV");
-        map.put(1, "I");
-
-    }
-
-    private final String convertToRomanString(int number) {
-        int l =  map.floorKey(number);
-        if ( number == l ) {
-            return map.get(number);
-        }
-        return map.get(l) + convertToRomanString(number-l);
-    }
-*/
     private final String convertToRomanString(String number) {
         return convertToRomanString(Integer.parseInt(number));
     }
-
 
     /**
      * Takes a number and converts it to the given target number system. Must be a positive integer.
@@ -114,12 +80,12 @@ public class Decimal implements NumeralInterface {
         }
 
         target = target.toLowerCase();
-        String result;
-        switch(target){
-            case "roman": result = convertToRomanString(number); break;
-            default: result = null;
+
+        if (target.equals("roman")) {
+            return convertToRomanString(number);
+        } else {
+            return null;
         }
-        return result;
     }
 
     /**

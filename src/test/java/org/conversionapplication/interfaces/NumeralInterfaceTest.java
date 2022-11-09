@@ -1,14 +1,21 @@
 package org.conversionapplication.interfaces;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+// import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 import org.conversionapplication.numeral.Decimal;
 import org.conversionapplication.numeral.Roman;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Test;
+
+// import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
+// import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,8 +25,16 @@ import java.util.regex.Pattern;
  * Test class for testing the numeralInterface interface
  */
 
-@RunWith(Parameterized.class)
-public class NumeralInterfaceTest {
+// @RunWith(Parameterized.class)
+// @ExtendWith(Parameterized.class)
+public class NumeralInterfaceTest { // implements NumeralInterfaceContract{
+
+    /*
+    @Override
+    public NumeralInterface create() {
+        return new NumeralInterface();
+    }
+
     public NumeralInterface numeralInterface;
 
 //    private static final String NUMERAL_NAME_PATTERN = "^[A-Za-z]{1,63}$";
@@ -36,6 +51,7 @@ public class NumeralInterfaceTest {
         assertTrue(pNumeralName.matcher(numeralInterface.getId()).find());
     }
 
+    // @ParameterizedTest
     @Parameterized.Parameters
     public static Collection<Object[]> instancesToTest(){
         return Arrays.asList(
@@ -43,7 +59,7 @@ public class NumeralInterfaceTest {
                 new Object[]{new Roman()}
         );
     }
-
+*/
 
     /*
     @Test

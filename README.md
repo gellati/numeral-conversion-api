@@ -8,7 +8,7 @@ The current implementation allows for conversions between the roman and decimal 
 
 ## Setting up the project
 
-Clone the repository to your own computer. Make sure you have Java 8 installed. 
+Clone the repository to your own computer. Make sure you have Java 8 installed.
 
 ### Building
 
@@ -19,24 +19,24 @@ Gradle is used as the project's build tool. To build the project, do
 This creates a runnable .jar file under build/libs.
 
 ### Running the application
-    
+
 The server can be started by going to the jar containing directory and entering the following command
 
     java -jar numeral-conversion-service-0.1.0-SNAPSHOT.jar
-    
+
 A simpler way to start the server is to do
 
     ./gradlew bootrun
-    
-in the project root directory. 
+
+in the project root directory.
 
 This will start a local server at `http://localhost:8080`
-    
+
 Gradle tasks can be excluded by placing an `-x` in front, e.g.
 
     ./gradlew build -x test
 
-   
+
 All runnable Gradle tasks can be listed with `gradle tasks`.
 
 
@@ -55,9 +55,9 @@ The request is done with the following parameters
 
 A GET request can be done with `curl`
 
-    curl -X GET 'http://localhost:8080/api/conversion?source=decimal&target=roman&number=6' 
+    curl -X GET 'http://localhost:8080/api/conversion?source=decimal&target=roman&number=6'
 
-If the request succeeds, the server will return an answer in JSON format and 200 OK in the header. 
+If the request succeeds, the server will return an answer in JSON format and 200 OK in the header.
 
 Example output:
 
@@ -124,6 +124,12 @@ or
 ```
 ./gradlew check
 ```
+
+Individual classes can be tested with
+```
+./gradlew build test --tests <package name and class>
+```
+example of package name and class: `org.conversionapplication.controllers.ConversionControllerTest`
 
 
 ## Docker
