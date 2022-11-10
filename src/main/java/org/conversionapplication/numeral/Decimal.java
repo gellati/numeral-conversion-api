@@ -72,6 +72,9 @@ public class Decimal implements NumeralInterface {
      */
 
     public String convert(String target, String number){
+        if (target == null) {
+            throw new IllegalArgumentException("Missing target numeral system");
+        }
         if(!org.apache.commons.lang3.StringUtils.isNumeric(number)){
             throw new IllegalArgumentException("Not a positive integer:" + number);
         }

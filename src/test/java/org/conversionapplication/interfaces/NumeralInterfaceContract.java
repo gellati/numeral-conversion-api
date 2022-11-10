@@ -1,13 +1,13 @@
 package org.conversionapplication.interfaces;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Random;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-interface NumeralInterfaceContract {
+public interface NumeralInterfaceContract {
 
     NumeralInterface create();
     Random random = new Random();
@@ -15,8 +15,15 @@ interface NumeralInterfaceContract {
     @Test
     default void postcondition() {
 
-        // Integer number = random.nextInt(10) + 1;
+        assertThrows(
+            IllegalArgumentException.class,
+            new Executable() {
 
-        assertTrue(StringUtils.isNotBlank(create().convert("roman", "1")));
+                @Override
+                public void execute() throws Throwable {
+                    create().convert("elephant", "x");
+                }
+            }
+        );
     }
 }

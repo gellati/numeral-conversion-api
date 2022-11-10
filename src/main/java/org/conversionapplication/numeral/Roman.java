@@ -62,6 +62,9 @@ public class Roman implements NumeralInterface {
      */
 
     public String convert(String target, String number){
+        if (target == null) {
+            throw new IllegalArgumentException("Missing target numeral system");
+        }
         target = target.toLowerCase();
         if (number == null || number.isEmpty() || !number.matches("^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")){
             throw new IllegalArgumentException("Non-Roman:" + number);

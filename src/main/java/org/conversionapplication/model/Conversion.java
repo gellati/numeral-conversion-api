@@ -1,7 +1,6 @@
 package org.conversionapplication.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.NoSuchElementException;
 
 /**
  * Class to hold data about the number conversion

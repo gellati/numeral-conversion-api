@@ -1,16 +1,31 @@
 package org.conversionapplication.numeral;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DecimalTest {
+import org.conversionapplication.interfaces.NumeralInterface;
+import org.conversionapplication.interfaces.NumeralInterfaceContract;
+
+public class DecimalTest implements NumeralInterfaceContract {
+
+    @Override
+    public NumeralInterface create() {
+        return new Decimal();
+    }
+
+    NumeralInterface decimal;
+
+    @BeforeEach
+    public void setup() {
+        decimal = create();
+    }
 
     @Test
     public void romansConvertedCorrectly(){
 
-        final Decimal decimal = new Decimal();
         final String roman = "roman";
 
         final String a = decimal.convert(roman, "890");
@@ -32,11 +47,19 @@ public class DecimalTest {
     }
 
     @Test
+    public void testNullTarget(){
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            public void execute() throws Throwable {
+                decimal.convert("non", "I");
+            }
+        });
+    }
+
+    @Test
     public void testOutOfRangeException(){
         Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                final Decimal decimal = new Decimal();
                 final String roman = "roman";
                 decimal.convert(roman, "4321");
             }
@@ -48,7 +71,6 @@ public class DecimalTest {
         Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                final Decimal decimal = new Decimal();
                 final String roman = "roman";
                 decimal.convert(roman, "3s1");
             }

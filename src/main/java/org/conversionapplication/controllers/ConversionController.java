@@ -4,11 +4,16 @@ import org.conversionapplication.conversionservice.NumeralCollection;
 import org.conversionapplication.interfaces.NumeralInterface;
 import org.conversionapplication.model.Conversion;
 import org.conversionapplication.model.PostDto;
-import org.springframework.web.bind.annotation.*;
-import org.conversionapplication.util.CustomErrorType;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,11 +45,12 @@ public class ConversionController {
             @ApiResponse(responseCode="200", description = "Successfully converted number")
     })
     @GetMapping(value = "/api/conversion", produces="application/json")
-    // public ResponseEntity<Conversion> conversion(
-    public ResponseEntity<String> conversion(
+
+    public ResponseEntity<Conversion> conversion(
             @RequestParam(value = "source", required = false) String source,
             @RequestParam(value = "target", required = false) String target,
-            @RequestParam(value = "number", required = false) String number
+            @RequestParam(value = "number", required = false) String number,
+            Model model
 /*
 // value parameter conflicts with open api
             @RequestParam(value = "Source numeral system from which to convert", required = false) String source,
@@ -52,35 +58,21 @@ public class ConversionController {
             @RequestParam(value = "Number string that should be converted", required = false) String number,
 */
 
-            // Model model
             ){
-                // System.out.println(String.format("%i : %s : %s", number, source, target));
                 if(logger.isLoggable(Level.ALL)) {
                     logger.log(Level.INFO, String.format("%i : %s : %s", number, source, target));
                 }
                 if(
                     number == null && source == null && target == null
                 ){
-                    return new ResponseEntity<CustomErrorType, String>(new CustomErrorType("no conversion"), HttpStatus.BAD_REQUEST);
-                    // return new ResponseEntity<>("all null2", HttpStatus.OK);
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                 }
-
-                // Conversion conversion = new Conversion("decimal", "2", "roman");
-                // NumeralCollection numeralCollection = new NumeralCollection();
-                // NumeralInterface numeral = numeralCollection.getNumeral("decimal");
-                // conversion.setTargetNumber(numeral.convert("roman", "2"));
-                // return new ResponseEntity<>(conversion.getTargetNumber(), HttpStatus.OK);
-                // return new ResponseEntity<>("hello", HttpStatus.OK);
-
-
 
                 Conversion conversion = new Conversion(source, number, target);
                 NumeralCollection numeralCollection = new NumeralCollection();
                 NumeralInterface numeral = numeralCollection.getNumeral(source);
                 conversion.setTargetNumber(numeral.convert(target, number));
-                // return new ResponseEntity<Conversion>(conversion, HttpStatus.OK);
-                return new ResponseEntity<>(conversion.getTargetNumber(), HttpStatus.OK);
-
+                return new ResponseEntity<>(conversion, HttpStatus.OK);
     }
 
     @Operation(summary = "Endpoint for numeral conversion.")
